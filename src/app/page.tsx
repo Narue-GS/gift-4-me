@@ -1,10 +1,10 @@
 import Image from "next/image";
 
 import sql from "@/db"
-import SELECT from "./service"
+import READ from "./service"
 
 export default async function Home() {
-  const gifts = await SELECT()
+  const gifts = await READ()
   return (
     gifts.map((i) => (
       <p key={i.id}>
