@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+body {
+  --main: rgb(56,56,255);
+  --radius:0.5rem;
+  --background:white;
+  --foreground:white;
+}
