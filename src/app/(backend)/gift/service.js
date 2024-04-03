@@ -17,7 +17,16 @@ export async function READ() {
     desc:i.desc,
     taken:i.taken
   }))
+} 
+
+export async function DELETE_(id) {
+  return await sql`
+    DELETE FROM gift
+    WHERE id = ${id}
+  `
 }
+
+
 
 export async function updateTaken(data) {
   return await sql`
