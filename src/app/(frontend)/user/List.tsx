@@ -1,57 +1,39 @@
 'use client'
 
+import { useState } from "react"
 import { IoTrashBinOutline } from "react-icons/io5";
 
-import { IGift, emptyModel } from "@/app/(backend)/api/gift/types"
-
-import { useState } from "react"
-
-import { CREATE, DELETE_, UPDATE, updateTaken } from "@/app/(backend)/api/gift/service"
+import { IUser, emptyModel } from "@/app/(backend)/api/user/types"
+import { CREATE, DELETE_, UPDATE } from "@/app/(backend)/api/user/service"
 
 import Confirmation from "./confirmation";
 import EntityForm from "./Form";
 
 export const dynamic = 'force-dynamic'
 
-export default function List({data}:{data:IGift[]}) {
+export default function List({data}:{data:IUser[]}) {
   let [list, setList] = useState(data)
   let [newItem, setNewItem] = useState({...emptyModel, id: data[data.length - 1]?.id + 1 || 0})
   let [selectedItem, setSelectedItem] = useState({...emptyModel, id: -1})
 
   let [modal, setModal] = useState({
-    data: {...emptyModel, id: -1},
+    data:{...emptyModel},
     state:false
   })
-  
-  let BRL = new Intl.NumberFormat('pt-BR', {
-    style: 'currency',
-    currency: 'BRL',
-  })
 
-  function add(data:IGift){
+  function add(data:IUser){
     CREATE(data)
     list = [...list, data]
     setList(list)
     setNewItem({...emptyModel, id: list[list.length -1]?.id + 1 || 0})
   }
 
-  function update(data:IGift) {
+  function update(data:IUser) {
     UPDATE(data)
     setList([...list.map((i) => {
       i.id == data.id ? i = data : ""
       return i
     })])
-  }
-
-  function take(id:number) {
-    list = [...list.map(i => {
-      if(i.id == id) {
-        updateTaken(i)
-        i.taken = !i.taken
-      }
-      return i 
-    })]
-    setList(list)
   }
 
   function delete_(id:number) {
@@ -61,7 +43,7 @@ export default function List({data}:{data:IGift[]}) {
     setNewItem({...emptyModel, id: list[list.length -1]?.id + 1 || 0})
   }
 
-  function addOrUpdate(data:IGift) {
+  function addOrUpdate(data:IUser) {
     list.find((i) => i.id == data.id) ? update(data) : add(data)
   }
 
@@ -81,14 +63,13 @@ export default function List({data}:{data:IGift[]}) {
             {
               list.length ?
               list.map((i) => (
-                <div style={i.taken ? {backgroundColor:"rgba(255,255,255,0.5)", textDecoration:"line-through"} : {}} className={`flex px-4 py-2 max-w-full max-h-[2.5em] overflow-hidden bg-white gap-2 items-center ${i.taken ? "" : "hover:scale-110"} cursor-pointer rounded-full w-fit transition`} key={i.id}>
+                <div className={`flex px-4 py-2 max-w-full max-h-[2.5em] overflow-hidden bg-white gap-2 items-center hover:scale-110 cursor-pointer rounded-full w-fit transition`} key={i.id}>
                   {/* item's body */}
                   <div className="flex gap-2" onClick={() => setModal({data:i, state:true})}>
                     <div className="rounded-full border px-[0.5em]">{i.id}</div>
                     <span className="max-w-[80%] overflow-hidden">{i.name}</span>
-                    <span>{BRL.format(i.avarage_price || 0) || ""}</span>
+                    <span className="max-w-[80%] overflow-hidden">{i.email}</span>
                   </div>
-                  <input defaultChecked={i.taken}  onChange={() => take(i.id)} type="checkbox" name="" id=""/>
                   <Confirmation confirmFunc={() => delete_(i.id)}>
                     <IoTrashBinOutline onClick={() => console.log(modal)} style={{color:"red", cursor:"pointer"}} />
                   </Confirmation>

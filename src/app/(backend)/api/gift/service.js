@@ -6,7 +6,7 @@ import sql from "@/db"
 export async function CREATE(data) {
   return await sql`
     INSERT INTO gift (id, name, avarage_price)
-    VALUES (${data.id}, ${data.name}, ${data.id})
+    VALUES (${data.id}, ${data.name}, ${data.avarage_price})
   `
 }
 
