@@ -65,7 +65,7 @@ export default function List({data}:{data:IUser[]}) {
               list.map((i) => (
                 <div className={`flex px-4 py-2 max-w-full max-h-[2.5em] overflow-hidden bg-white gap-2 items-center hover:scale-110 cursor-pointer rounded-full w-fit transition`} key={i.id}>
                   {/* item's body */}
-                  <div className="flex gap-2" onClick={() => setModal({data:i, state:true})}>
+                  <div className="flex gap-2  " onClick={() => setModal({data:i, state:true})}>
                     <div className="rounded-full border px-[0.5em]">{i.id}</div>
                     <span className="max-w-[80%] overflow-hidden">{i.name}</span>
                     <span className="max-w-[80%] overflow-hidden">{i.email}</span>

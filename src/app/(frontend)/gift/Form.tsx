@@ -52,7 +52,7 @@ export default function EntityForm({data, close, save}: {data: {name:string, ava
   return (
     <section className="flex justify-center">
       <div onClick={close} className="w-screen h-screen fixed backdrop-brightness-75"></div>
-      <div className="w-[33vw] absolute top-10 z-20 bg-white p-4 rounded-lg">
+      <div className="w-[30rem] max-w-[90vw]  absolute top-10 z-20 bg-white p-4 rounded-lg">
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
             <FormField control={form.control} name="name" render={({ field }) => (
