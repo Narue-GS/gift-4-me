@@ -1,7 +1,7 @@
 import Image from "next/image";
 
 import { READ } from "../../(backend)/api/gift/service"
-import List from "../../../../List"
+import List from "./List"
 import { IGift } from "../../(backend)/api/gift/types";
 
 export const dynamic = "force-dynamic"
