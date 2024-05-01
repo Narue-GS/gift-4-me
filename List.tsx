@@ -8,8 +8,8 @@ import { useState } from "react"
 
 import { CREATE, DELETE_, UPDATE, updateTaken } from "@/app/(backend)/api/gift/service"
 
-import Confirmation from "./confirmation";
-import EntityForm from "./Form";
+import Confirmation from "./src/app/(frontend)/gift/confirmation";
+import EntityForm from "./src/app/(frontend)/gift/Form";
 
 export const dynamic = 'force-dynamic'
 
