@@ -2,10 +2,11 @@
 
 import sql from "@/db"
 
+
 export async function CREATE(data) {
   return await sql`
     INSERT INTO gift (id, name, avarage_price)
-    VALUES (${data.id}, ${data.name}, ${data.id})
+    VALUES (${data.id}, ${data.name}, ${data.avarage_price})
   `
 }
 
@@ -26,6 +27,15 @@ export async function DELETE_(id) {
   `
 }
 
+export async function UPDATE(data) {
+  return await sql`
+    UPDATE gift
+    SET name = ${data.name},
+        "desc" = ${data.desc}
+    WHERE id = ${data.id}
+  `
+}
+
 
 
 export async function updateTaken(data) {
@@ -35,4 +45,3 @@ export async function updateTaken(data) {
     WHERE id = ${data.id}
   `
 }
-
